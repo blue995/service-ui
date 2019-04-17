@@ -653,7 +653,7 @@ define(['util'], function () {
             language: 'Language',
             english: 'English (United States)',
             russian: 'Russian',
-            german: 'German',
+            german: 'Deutsch',
             reloadPage: 'You have to <a href="">Reload</a> the page to implement language change.<br>' +
             ' Ru lang in beta. Please help us to translate it, send your PR to this <a href ="https://github.com/reportportal/service-ui/blob/develop/src/main/resources/public/js/src/localizations/ru-RU.js">file</a>.'
         },

@@ -21,10 +21,12 @@ define(function (require) {
     var $ = require('jquery');
     var langEn = require('localizations/en-EU');
     var langRu = require('localizations/ru-RU');
+    var langDe = require('localizations/de-DE');
     var SingletonAppStorage = require('storage/SingletonAppStorage');
     var appStorage = new SingletonAppStorage();
     var lang = appStorage.get('appLanguage') || 'en';
     var langRuSafe = extendLoc(langEn, langRu);
+    var langDeSafe = extendLoc(langEn, langDe);
     var Localization = {};
     require('select2');
 
@@ -49,6 +51,9 @@ define(function (require) {
     switch (lang) {
     case 'ru':
         Localization = langRuSafe;
+        break;
+    case 'de':
+        Localization = langDeSafe;
         break;
     default:
         Localization = langEn;
