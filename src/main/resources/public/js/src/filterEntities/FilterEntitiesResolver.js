@@ -168,6 +168,7 @@ define(function (require, exports, module) {
                 id: 'description',
                 condition: 'cnt',
                 options: filterNameOptions(),
+                valueMaxLength: 500,
                 valueOnlyDigits: false
             }),
             new Filters.EntitySelectModel({

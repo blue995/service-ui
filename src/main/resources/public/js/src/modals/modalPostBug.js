@@ -242,7 +242,7 @@ define(function (require) {
                 $('[data-js-dropdown]', $(this)).data('type', field.fieldType);
                 if (!config.userModel.hasPermissions()
                     || (config.forSettings.btsJIRA.disabledForEdit.indexOf(field.id) !== -1)) {
-                    $('[data-js-dropdown]', $(this)).attr('disabled', 'disabled');
+                    //$('[data-js-dropdown]', $(this)).attr('disabled', 'disabled');
                 }
                 if (field.required) {
                     $('[data-js-dropdown]', $(this)).addClass('required-value');
