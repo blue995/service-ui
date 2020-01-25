@@ -15,7 +15,7 @@
  */
 
 import { FormattedMessage } from 'react-intl';
-import { SAUCE_LABS, EMAIL, JIRA, RALLY, SAML } from 'common/constants/integrationNames';
+import { SAUCE_LABS, EMAIL, JIRA, RALLY, TFS, SAML } from 'common/constants/integrationNames';
 
 export const INTEGRATIONS_DESCRIPTIONS_MAP = {
   [SAUCE_LABS]: (
@@ -40,6 +40,12 @@ export const INTEGRATIONS_DESCRIPTIONS_MAP = {
     <FormattedMessage
       id="Integrations.Rally.description"
       defaultMessage="Integration with Rally, can be required for projects that collect defects in a separate tracking tool. Integration provides an exchange of information between ReportPortal and Rally, such as posting issues and linking issues, getting updates on their statuses."
+    />
+  ),
+  [TFS]: (
+    <FormattedMessage
+      id="Integrations.Tfs.description"
+      defaultMessage="Integration with TFS, can be required for projects that collect defects in a separate tracking tool. Integration provides an exchange of information between ReportPortal and TFS, such as posting issues and linking issues, getting updates on their statuses."
     />
   ),
   [SAML]: (

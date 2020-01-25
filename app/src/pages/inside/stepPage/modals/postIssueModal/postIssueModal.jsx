@@ -23,7 +23,7 @@ import classNames from 'classnames/bind';
 import { injectIntl, defineMessages, intlShape } from 'react-intl';
 import { fetch, updateSessionItem, getSessionItem } from 'common/utils';
 import { URLS } from 'common/urls';
-import { JIRA, RALLY } from 'common/constants/integrationNames';
+import { JIRA, RALLY, TFS } from 'common/constants/integrationNames';
 import { COMMON_LOCALE_KEYS } from 'common/constants/localization';
 import { activeProjectSelector, userIdSelector } from 'controllers/user';
 import { namedAvailableBtsIntegrationsSelector } from 'controllers/plugins';
@@ -44,6 +44,7 @@ import { BetaBadge } from 'pages/inside/common/betaBadge';
 import { BtsIntegrationSelector } from 'pages/inside/common/btsIntegrationSelector';
 import { JiraCredentials } from './jiraCredentials';
 import { RallyCredentials } from './rallyCredentials';
+import { TfsCredentials } from './tfsCredentials';
 import {
   INCLUDE_ATTACHMENTS_KEY,
   INCLUDE_LOGS_KEY,
@@ -63,6 +64,7 @@ const cx = classNames.bind(styles);
 const SYSTEM_CREDENTIALS_BLOCKS = {
   [JIRA]: JiraCredentials,
   [RALLY]: RallyCredentials,
+  [TFS]: TfsCredentials,
 };
 
 let validationConfig = null;

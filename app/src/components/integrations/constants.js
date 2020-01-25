@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-import { JIRA, RALLY, EMAIL, SAUCE_LABS, SAML } from 'common/constants/integrationNames';
+import { JIRA, RALLY, TFS, EMAIL, SAUCE_LABS, SAML } from 'common/constants/integrationNames';
 import JiraIcon from 'common/img/plugins/jira.svg';
 import RallyIcon from 'common/img/plugins/rally.png';
+import TfsIcon from 'common/img/plugins/tfs.png';
 import EmailIcon from 'common/img/plugins/email.png';
 import SauceLabsIcon from 'common/img/plugins/sauce-labs.png';
 import SamlIcon from 'common/img/plugins/saml.png';
@@ -29,6 +30,8 @@ import {
   JiraConnectionFormFields,
   RallySettings,
   RallyConnectionFormFields,
+  TfsSettings,
+  TfsConnectionFormFields,
   SamlSettings,
   SamlFormFields,
 } from './integrationProviders';
@@ -36,6 +39,7 @@ import {
 export const INTEGRATION_NAMES_TITLES = {
   [JIRA]: 'JIRA',
   [RALLY]: 'RALLY',
+  [TFS]: 'TFS',
   [EMAIL]: 'Email Server',
   [SAUCE_LABS]: 'Sauce Labs',
   [SAML]: 'SAML',
@@ -45,11 +49,12 @@ export const INTEGRATIONS_IMAGES_MAP = {
   [JIRA]: JiraIcon,
   [RALLY]: RallyIcon,
   [EMAIL]: EmailIcon,
+  [TFS]: TfsIcon,
   [SAUCE_LABS]: SauceLabsIcon,
   [SAML]: SamlIcon,
 };
 
-export const INTEGRATIONS_SUPPORTS_MULTIPLE_INSTANCES = [JIRA, RALLY, SAML];
+export const INTEGRATIONS_SUPPORTS_MULTIPLE_INSTANCES = [JIRA, RALLY, TFS, SAML];
 
 export const BUILTIN_PLUGINS = [EMAIL];
 
@@ -58,6 +63,7 @@ export const INTEGRATIONS_FORM_FIELDS_COMPONENTS_MAP = {
   [EMAIL]: EmailFormFields,
   [JIRA]: JiraConnectionFormFields,
   [RALLY]: RallyConnectionFormFields,
+  [TFS]: TfsConnectionFormFields,
   [SAML]: SamlFormFields,
 };
 
@@ -66,5 +72,6 @@ export const INTEGRATIONS_SETTINGS_COMPONENTS_MAP = {
   [EMAIL]: EmailSettings,
   [JIRA]: JiraSettings,
   [RALLY]: RallySettings,
+  [TFS]: TfsSettings,
   [SAML]: SamlSettings,
 };

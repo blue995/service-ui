@@ -19,6 +19,7 @@ import { BTS_GROUP_TYPE } from 'common/constants/pluginsGroupTypes';
 import {
   JIRA,
   RALLY,
+  TFS,
   EMAIL,
   SAUCE_LABS,
   INTEGRATION_NAMES_BY_GROUP_TYPES_MAP,
@@ -60,6 +61,7 @@ export const namedGlobalIntegrationsSelectorsMap = {
   [SAUCE_LABS]: createNamedIntegrationsSelector(SAUCE_LABS, globalIntegrationsSelector),
   [JIRA]: createNamedIntegrationsSelector(JIRA, globalIntegrationsSelector),
   [RALLY]: createNamedIntegrationsSelector(RALLY, globalIntegrationsSelector),
+  [TFS]: createNamedIntegrationsSelector(TFS, globalIntegrationsSelector),
   [EMAIL]: createNamedIntegrationsSelector(EMAIL, globalIntegrationsSelector),
 };
 
@@ -67,6 +69,7 @@ export const namedProjectIntegrationsSelectorsMap = {
   [SAUCE_LABS]: createNamedIntegrationsSelector(SAUCE_LABS, projectIntegrationsSelector),
   [JIRA]: createNamedIntegrationsSelector(JIRA, projectIntegrationsSelector),
   [RALLY]: createNamedIntegrationsSelector(RALLY, projectIntegrationsSelector),
+  [TFS]: createNamedIntegrationsSelector(TFS, projectIntegrationsSelector),
   [EMAIL]: createNamedIntegrationsSelector(EMAIL, projectIntegrationsSelector),
 };
 
