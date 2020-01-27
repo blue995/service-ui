@@ -16,3 +16,4 @@ build/
 #bin/
 .idea/
 vendor/
+repo-management/
