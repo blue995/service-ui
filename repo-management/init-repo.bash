@@ -4,9 +4,10 @@ CURRENT_DIR=$PWD
 BASEDIR=$(dirname "$0")
 
 cd "$BASEDIR"/..
-git remote add main https://github.com/reportportal/service-ui.git
-git fetch main
+git remote rename origin patched
+git remote add origin https://github.com/reportportal/service-ui.git
+git fetch origin
 git checkout master
-git branch --set-upstream-to main/master
+git branch --set-upstream-to origin/master
 git checkout service-ui-with-tfs
 cd "$CURRENT_DIR"
