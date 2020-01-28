@@ -7,7 +7,6 @@ cd "$BASEDIR"/..
 git remote rename origin patched
 git remote add origin https://github.com/reportportal/service-ui.git
 git fetch origin
-git checkout master
-git branch --set-upstream-to origin/master
+git branch master --set-upstream-to origin/master
 git checkout service-ui-with-tfs
 cd "$CURRENT_DIR"
