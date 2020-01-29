@@ -105,7 +105,7 @@ export class TfsConnectionFormFields extends Component {
             <Input mobileDisabled />
           </FieldErrorHint>
         </IntegrationFormField>
-        {/*[TB]: Not necessary for TFS (ATM) */}
+        {/* [TB]: Not necessary for TFS (ATM) */}
         {/* <IntegrationFormField
           name="authType"
           label={formatMessage(COMMON_BTS_MESSAGES.authTypeLabel)}
