@@ -21,8 +21,13 @@ export const messages = defineMessages({
     id: 'TfsConnectionFormFields.projectIdLabel',
     defaultMessage: 'Project ID in BTS',
   },
-  accessKeyLabel: {
-    id: 'TfsConnectionFormFields.accessKeyLabel',
-    defaultMessage: 'AccessKey',
+  //// [TB]: Not necessary for TFS (ATM)
+  // accessKeyLabel: {
+  //   id: 'TfsConnectionFormFields.accessKeyLabel',
+  //   defaultMessage: 'AccessKey',
+  // },
+  activeDirectoryUserLabel: {
+    id: 'TfsConnectionFormFields.activeDirectoryUserLabel',
+    defaultMessage: 'AD User',
   },
 });
