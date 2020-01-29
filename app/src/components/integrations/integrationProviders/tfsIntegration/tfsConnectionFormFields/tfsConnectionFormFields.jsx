@@ -19,9 +19,9 @@ import PropTypes from 'prop-types';
 import { injectIntl, intlShape } from 'react-intl';
 import { commonValidators } from 'common/utils';
 import { FieldErrorHint } from 'components/fields/fieldErrorHint';
-//// [TB]: Not necessary for TFS (ATM)
-//import { InputDropdown } from 'components/inputs/inputDropdown';
-//import { InputTextArea } from 'components/inputs/inputTextArea';
+// [TB]: Not necessary for TFS (ATM)
+// import { InputDropdown } from 'components/inputs/inputDropdown';
+// import { InputTextArea } from 'components/inputs/inputTextArea';
 import { Input } from 'components/inputs/input';
 import { IntegrationFormField } from 'components/integrations/elements';
 import { COMMON_BTS_MESSAGES } from 'components/integrations/elements/bts';
@@ -50,8 +50,7 @@ export class TfsConnectionFormFields extends Component {
 
   constructor(props) {
     super(props);
-    //// [TB]: Not necessary for TFS (ATM)
-    //this.systemAuthTypes = [{ value: 'OAUTH', label: 'ApiKey' }];
+    this.systemAuthTypes = [{ value: 'OAUTH', label: 'ApiKey' }];
   }
 
   componentDidMount() {
@@ -107,8 +106,7 @@ export class TfsConnectionFormFields extends Component {
           </FieldErrorHint>
         </IntegrationFormField>
         {/*[TB]: Not necessary for TFS (ATM) */}
-        {/* 
-        <IntegrationFormField
+        {/* <IntegrationFormField
           name="authType"
           label={formatMessage(COMMON_BTS_MESSAGES.authTypeLabel)}
           disabled={disabled}

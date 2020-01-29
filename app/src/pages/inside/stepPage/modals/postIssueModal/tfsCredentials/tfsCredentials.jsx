@@ -47,8 +47,8 @@ export class TfsCredentials extends Component {
           fieldWrapperClassName={cx('field-wrapper')}
           label={intl.formatMessage(messages.apiKeyLabel)}
           labelClassName={cx('text-area-label')}
-          //// [TB]: Not required (ATM)
-          //required
+          // [TB]: Not required (ATM)
+          // required
           type="text"
         >
           <FieldErrorHint>
