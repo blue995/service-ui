@@ -9,9 +9,7 @@ then
 fi
 if [ -z "$VERSION_TAG" ]
 then
-    docker build -f "$BASEDIR"/../Dockerfile-full -t "$DOCKER_TAG":latest "$BASEDIR"/../.
+    docker build -f "$BASEDIR"/../Dockerfile-full --cache-from "$DOCKER_TAG":latest --tag "$DOCKER_TAG":latest "$BASEDIR"/../.
 else
-    docker build -f "$BASEDIR"/../Dockerfile-full -t "$DOCKER_TAG":latest -t "$DOCKER_TAG":"$VERSION_TAG" "$BASEDIR"/../.
+    docker build -f "$BASEDIR"/../Dockerfile-full --cache-from "$DOCKER_TAG":latest --tag "$DOCKER_TAG":latest --tag "$DOCKER_TAG":"$VERSION_TAG" "$BASEDIR"/../.
 fi
-
-#--cache-from "$DOCKER_TAG":latest
