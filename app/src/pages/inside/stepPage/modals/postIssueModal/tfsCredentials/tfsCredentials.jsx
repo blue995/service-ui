@@ -29,10 +29,6 @@ const messages = defineMessages({
     id: 'TfsCredentials.apiKeyLabel',
     defaultMessage: 'ApiKey',
   },
-  activeDirectoryUserLabel: {
-    id: 'TfsCredentials.activeDirectoryUserLabel',
-    defaultMessage: 'AD User',
-  },
 });
 
 @injectIntl
@@ -49,9 +45,9 @@ export class TfsCredentials extends Component {
           name="token"
           containerClassName={cx('text-area-container')}
           fieldWrapperClassName={cx('field-wrapper')}
-          label={intl.formatMessage(messages.activeDirectoryUserLabel)}
+          label={intl.formatMessage(messages.apiKeyLabel)}
           labelClassName={cx('text-area-label')}
-          //// [TB]: Not necessary for TFS (ATM), AD user should be provided via fields
+          //// [TB]: Not required (ATM)
           //required
           type="text"
         >

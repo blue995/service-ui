@@ -107,7 +107,8 @@ export class TfsConnectionFormFields extends Component {
           </FieldErrorHint>
         </IntegrationFormField>
         {/*[TB]: Not necessary for TFS (ATM) */}
-        {/* <IntegrationFormField
+        {/* 
+        <IntegrationFormField
           name="authType"
           label={formatMessage(COMMON_BTS_MESSAGES.authTypeLabel)}
           disabled={disabled}
@@ -129,18 +130,7 @@ export class TfsConnectionFormFields extends Component {
             <InputTextArea type="text" mobileDisabled />
           </FieldErrorHint>
         </IntegrationFormField>
-        <IntegrationFormField
-          name="activeDirectoryUser"
-          label={formatMessage(messages.activeDirectoryUserLabel)}
-          required
-          disabled={disabled}
-          lineAlign={lineAlign}
-          validate={commonValidators.requiredField}
-        >
-          <FieldErrorHint>
-            <InputTextArea type="text" mobileDisabled />
-          </FieldErrorHint>
-        </IntegrationFormField> */}
+         */}
       </Fragment>
     );
   }
