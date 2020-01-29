@@ -1,15 +1,27 @@
 #!/bin/bash
+
 DOCKER_TAG="$1"
 VERSION_TAG="$2"
 BASEDIR=$(dirname "$0")
+
 if [ -z "$DOCKER_TAG" ]
 then
     echo "Docker Image Tag missing."
     exit 1
 fi
+
+check_return() {
+    local $ret=$?
+    if [ $ret -ne 0 ]
+    then
+        exit $ret
+    fi
+}
+
 if [ -z "$VERSION_TAG" ]
 then
     docker build -f "$BASEDIR"/../Dockerfile-full --cache-from "$DOCKER_TAG":latest --tag "$DOCKER_TAG":latest "$BASEDIR"/../.
 else
     docker build -f "$BASEDIR"/../Dockerfile-full --cache-from "$DOCKER_TAG":latest --tag "$DOCKER_TAG":latest --tag "$DOCKER_TAG":"$VERSION_TAG" "$BASEDIR"/../.
 fi
+check_return
