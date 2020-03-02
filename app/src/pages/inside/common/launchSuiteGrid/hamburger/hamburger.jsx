@@ -292,7 +292,7 @@ export class Hamburger extends Component {
               title={this.getDeleteItemTooltip()}
             />
           </div>
-          <div className={cx('export-block')}>
+          {/* <div className={cx('export-block')}>
             <div className={cx('export-label')}>
               <FormattedMessage id={'Hamburger.export'} defaultMessage={'Export:'} />
             </div>
@@ -313,7 +313,7 @@ export class Hamburger extends Component {
                 </GhostButton>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     );
