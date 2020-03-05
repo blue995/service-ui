@@ -16,8 +16,9 @@
 
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl, intlShape } from 'react-intl';
-import { commonValidators } from 'common/utils';
+import { injectIntl } from 'react-intl';
+import { SECRET_FIELDS_KEY } from 'controllers/plugins';
+import { commonValidators } from 'common/utils/validation';
 import { FieldErrorHint } from 'components/fields/fieldErrorHint';
 // [TB]: Not necessary for TFS (ATM)
 // import { InputDropdown } from 'components/inputs/inputDropdown';
@@ -31,13 +32,14 @@ import { messages } from '../messages';
 @injectIntl
 export class TfsConnectionFormFields extends Component {
   static propTypes = {
-    intl: intlShape.isRequired,
+    intl: PropTypes.object.isRequired,
     initialize: PropTypes.func.isRequired,
     change: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
     lineAlign: PropTypes.bool,
     initialData: PropTypes.object,
     editAuthMode: PropTypes.bool,
+    updateMetaData: PropTypes.func,
   };
 
   static defaultProps = {
@@ -46,6 +48,7 @@ export class TfsConnectionFormFields extends Component {
     lineAlign: false,
     initialData: DEFAULT_FORM_CONFIG,
     editAuthMode: false,
+    updateMetaData: () => {},
   };
 
   constructor(props) {
@@ -55,6 +58,9 @@ export class TfsConnectionFormFields extends Component {
 
   componentDidMount() {
     this.props.initialize(this.props.initialData);
+    this.props.updateMetaData({
+      [SECRET_FIELDS_KEY]: ['oauthAccessKey'],
+    });
   }
 
   render() {

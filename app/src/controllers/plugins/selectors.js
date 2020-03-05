@@ -22,6 +22,9 @@ import {
   TFS,
   EMAIL,
   SAUCE_LABS,
+  SAML,
+  LDAP,
+  AD,
   INTEGRATION_NAMES_BY_GROUP_TYPES_MAP,
 } from 'common/constants/integrationNames';
 import {
@@ -34,6 +37,9 @@ import {
 const domainSelector = (state) => state.plugins || {};
 
 export const pluginsSelector = (state) => domainSelector(state).plugins;
+export const pluginByNameSelector = (state, name) =>
+  pluginsSelector(state).find((plugin) => plugin.name === name);
+
 const globalIntegrationsSelector = (state) =>
   domainSelector(state).integrations.globalIntegrations || [];
 const projectIntegrationsSelector = (state) =>
@@ -52,6 +58,14 @@ export const availableGroupedPluginsSelector = createSelector(
   },
 );
 
+export const isBtsPluginsExistSelector = createSelector(pluginsSelector, (plugins) =>
+  plugins.some((item) => item.groupType === BTS_GROUP_TYPE),
+);
+
+export const enabledBtsPluginsSelector = createSelector(pluginsSelector, (plugins) =>
+  plugins.filter((item) => item.groupType === BTS_GROUP_TYPE && item.enabled),
+);
+
 export const createNamedIntegrationsSelector = (integrationName, integrationsSelector) =>
   createSelector(integrationsSelector, (integrations) =>
     filterIntegrationsByName(integrations, integrationName),
@@ -63,6 +77,9 @@ export const namedGlobalIntegrationsSelectorsMap = {
   [RALLY]: createNamedIntegrationsSelector(RALLY, globalIntegrationsSelector),
   [TFS]: createNamedIntegrationsSelector(TFS, globalIntegrationsSelector),
   [EMAIL]: createNamedIntegrationsSelector(EMAIL, globalIntegrationsSelector),
+  [SAML]: createNamedIntegrationsSelector(SAML, globalIntegrationsSelector),
+  [LDAP]: createNamedIntegrationsSelector(LDAP, globalIntegrationsSelector),
+  [AD]: createNamedIntegrationsSelector(AD, globalIntegrationsSelector),
 };
 
 export const namedProjectIntegrationsSelectorsMap = {
@@ -71,6 +88,9 @@ export const namedProjectIntegrationsSelectorsMap = {
   [RALLY]: createNamedIntegrationsSelector(RALLY, projectIntegrationsSelector),
   [TFS]: createNamedIntegrationsSelector(TFS, projectIntegrationsSelector),
   [EMAIL]: createNamedIntegrationsSelector(EMAIL, projectIntegrationsSelector),
+  [SAML]: createNamedIntegrationsSelector(SAML, projectIntegrationsSelector),
+  [LDAP]: createNamedIntegrationsSelector(LDAP, projectIntegrationsSelector),
+  [AD]: createNamedIntegrationsSelector(AD, projectIntegrationsSelector),
 };
 
 export const availableIntegrationsByPluginNameSelector = (state, pluginName) => {

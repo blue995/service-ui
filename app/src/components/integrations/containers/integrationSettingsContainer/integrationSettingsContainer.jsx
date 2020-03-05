@@ -19,10 +19,8 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import { connect } from 'react-redux';
 import { updateIntegrationAction } from 'controllers/plugins';
-import {
-  INTEGRATIONS_SETTINGS_COMPONENTS_MAP,
-  INTEGRATIONS_IMAGES_MAP,
-} from 'components/integrations/constants';
+import { INTEGRATIONS_IMAGES_MAP } from 'components/integrations/constants';
+import { INTEGRATIONS_SETTINGS_COMPONENTS_MAP } from 'components/integrations/settingsComponentsMap';
 import styles from './integrationSettingsContainer.scss';
 
 const cx = classNames.bind(styles);
@@ -47,9 +45,12 @@ export class IntegrationSettingsContainer extends Component {
     updatedParameters: {},
   };
 
-  updateIntegration = (formData, onConfirm) => {
+  updateIntegration = (formData, onConfirm, metaData) => {
     const {
-      data: { id },
+      data: {
+        integrationType: { name: pluginName },
+        id,
+      },
       isGlobal,
     } = this.props;
     const data = {
@@ -61,12 +62,19 @@ export class IntegrationSettingsContainer extends Component {
       data.name = formData.integrationName;
     }
 
-    this.props.updateIntegrationAction(data, isGlobal, id, () => {
-      this.setState({
-        updatedParameters: data,
-      });
-      onConfirm();
-    });
+    this.props.updateIntegrationAction(
+      data,
+      isGlobal,
+      id,
+      pluginName,
+      () => {
+        this.setState({
+          updatedParameters: data,
+        });
+        onConfirm();
+      },
+      metaData,
+    );
   };
 
   render() {
