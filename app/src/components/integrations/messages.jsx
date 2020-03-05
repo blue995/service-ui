@@ -15,7 +15,16 @@
  */
 
 import { FormattedMessage } from 'react-intl';
-import { SAUCE_LABS, EMAIL, JIRA, RALLY, TFS, SAML, LDAP, AD } from 'common/constants/integrationNames';
+import {
+  SAUCE_LABS,
+  EMAIL,
+  JIRA,
+  RALLY,
+  TFS,
+  SAML,
+  LDAP,
+  AD
+} from 'common/constants/integrationNames';
 
 export const INTEGRATIONS_DESCRIPTIONS_MAP = {
   [SAUCE_LABS]: (

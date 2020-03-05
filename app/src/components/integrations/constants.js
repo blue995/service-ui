@@ -14,7 +14,16 @@
  * limitations under the License.
  */
 
-import { JIRA, RALLY, TFS, EMAIL, SAUCE_LABS, SAML, LDAP, AD } from 'common/constants/integrationNames';
+import {
+  JIRA,
+  RALLY,
+  TFS,
+  EMAIL,
+  SAUCE_LABS,
+  SAML,
+  LDAP,
+  AD
+} from 'common/constants/integrationNames';
 import JiraIcon from 'common/img/plugins/jira.svg';
 import RallyIcon from 'common/img/plugins/rally.png';
 import TfsIcon from 'common/img/plugins/tfs.png';

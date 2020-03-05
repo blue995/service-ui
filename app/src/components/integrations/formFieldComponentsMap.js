@@ -14,7 +14,16 @@
  *  limitations under the License.
  */
 
-import { AD, EMAIL, JIRA, LDAP, RALLY, TFS, SAML, SAUCE_LABS } from 'common/constants/integrationNames';
+import {
+  AD,
+  EMAIL,
+  JIRA,
+  LDAP,
+  RALLY,
+  TFS,
+  SAML,
+  SAUCE_LABS
+} from 'common/constants/integrationNames';
 import { SauceLabsFormFields } from './integrationProviders/sauceLabsIntegration/sauceLabsFormFields';
 import { EmailFormFields } from './integrationProviders/emailIntegration/emailFormFields';
 import { JiraConnectionFormFields } from './integrationProviders/jiraIntegration/jiraConnectionFormFields';
