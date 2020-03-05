@@ -23,7 +23,7 @@ import {
   TFS,
   SAML,
   LDAP,
-  AD
+  AD,
 } from 'common/constants/integrationNames';
 
 export const INTEGRATIONS_DESCRIPTIONS_MAP = {

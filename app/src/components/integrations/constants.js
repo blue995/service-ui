@@ -22,7 +22,7 @@ import {
   SAUCE_LABS,
   SAML,
   LDAP,
-  AD
+  AD,
 } from 'common/constants/integrationNames';
 import JiraIcon from 'common/img/plugins/jira.svg';
 import RallyIcon from 'common/img/plugins/rally.png';

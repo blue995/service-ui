@@ -22,7 +22,7 @@ import {
   RALLY,
   TFS,
   SAML,
-  SAUCE_LABS
+  SAUCE_LABS,
 } from 'common/constants/integrationNames';
 import { SauceLabsSettings } from './integrationProviders/sauceLabsIntegration/sauceLabsSettings';
 import { EmailSettings } from './integrationProviders/emailIntegration/emailSettings';
