@@ -43,11 +43,15 @@ export class LogMessageBlock extends Component {
 
     return (
       <div ref={refFunction} className={cx('log-message-block')}>
-        {customProps.consoleView && <span className={cx('time')}>{dateFormat(value.time)}</span>}
         {customProps.markdownMode ? (
           <MarkdownViewer value={messageWithoutMarkdown} />
         ) : (
-          <div className={cx('log-message')}>{messageWithoutMarkdown}</div>
+          <div className={cx('log-message')}>
+            {customProps.consoleView && (
+              <span className={cx('time')}>{dateFormat(value.time)}</span>
+            )}
+            {messageWithoutMarkdown}
+          </div>
         )}
       </div>
     );

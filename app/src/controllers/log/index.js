@@ -18,10 +18,10 @@ export { logSagas } from './sagas';
 export {
   fetchLogPageData,
   refreshLogPageData,
-  fetchHistoryEntriesAction,
   fetchLogPageStackTrace,
   setPageLoadingAction,
   clearLogPageStackTrace,
+  updateHistoryItemIssuesAction,
 } from './actionCreators';
 export { logReducer } from './reducer';
 export {
@@ -65,15 +65,4 @@ export {
   isLogPageWithNestedSteps,
   pageLoadingSelector,
 } from './selectors';
-export {
-  getWithAttachments,
-  setWithAttachments,
-  getLogLevel,
-  setLogLevel,
-  getLogViewMode,
-  setLogViewMode,
-  setHidePassedLogs,
-  getHidePassedLogs,
-  setHideEmptySteps,
-  getHideEmptySteps,
-} from './storageUtils';
+export { getLogLevel, setLogLevel, getLogViewMode, setLogViewMode } from './storageUtils';
