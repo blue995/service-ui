@@ -32,9 +32,10 @@ import {
   sortItemsByGroupType,
   groupItems,
   filterIntegrationsByName,
+  filterEnabledPlugins,
 } from './utils';
 
-const domainSelector = (state) => state.plugins || {};
+export const domainSelector = (state) => state.plugins || {};
 
 export const pluginsSelector = (state) =>
   domainSelector(state).plugins.filter((item) => item.name !== SAML);
@@ -42,12 +43,15 @@ export const pluginsSelector = (state) =>
 export const pluginByNameSelector = (state, name) =>
   pluginsSelector(state).find((plugin) => plugin.name === name);
 
-const globalIntegrationsSelector = (state) =>
+export const globalIntegrationsSelector = (state) =>
   domainSelector(state).integrations.globalIntegrations || [];
 const projectIntegrationsSelector = (state) =>
   domainSelector(state).integrations.projectIntegrations || [];
 
 export const availablePluginsSelector = createSelector(pluginsSelector, filterAvailablePlugins);
+export const enabledPluginNamesSelector = createSelector(pluginsSelector, (plugins) =>
+  filterEnabledPlugins(plugins).map((plugin) => plugin.name),
+);
 
 export const availableGroupedPluginsSelector = createSelector(
   availablePluginsSelector,
@@ -72,6 +76,9 @@ export const createNamedIntegrationsSelector = (integrationName, integrationsSel
   createSelector(integrationsSelector, (integrations) =>
     filterIntegrationsByName(integrations, integrationName),
   );
+
+export const createGlobalNamedIntegrationsSelector = (name) =>
+  createNamedIntegrationsSelector(name, globalIntegrationsSelector);
 
 export const namedGlobalIntegrationsSelectorsMap = {
   [SAUCE_LABS]: createNamedIntegrationsSelector(SAUCE_LABS, globalIntegrationsSelector),
