@@ -19,10 +19,10 @@ import track from 'react-tracking';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import { LAUNCHES_PAGE_EVENTS } from 'components/main/analytics/events';
-// import { GhostButton } from 'components/buttons/ghostButton';
+import { GhostButton } from 'components/buttons/ghostButton';
 import { CUSTOMER } from 'common/constants/projectRoles';
 import { IN_PROGRESS } from 'common/constants/launchStatuses';
-import { injectIntl, defineMessages /* ,  FormattedMessage */ } from 'react-intl';
+import { injectIntl, defineMessages, FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import { canDeleteLaunch, canForceFinishLaunch, canMoveToDebug } from 'common/utils/permissions';
 import { URLS } from 'common/urls';
@@ -292,7 +292,7 @@ export class Hamburger extends Component {
               title={this.getDeleteItemTooltip()}
             />
           </div>
-          {/* <div className={cx('export-block')}>
+          <div className={cx('export-block')}>
             <div className={cx('export-label')}>
               <FormattedMessage id={'Hamburger.export'} defaultMessage={'Export:'} />
             </div>
@@ -313,7 +313,7 @@ export class Hamburger extends Component {
                 </GhostButton>
               </div>
             </div>
-          </div> */}
+          </div>
         </div>
       </div>
     );
