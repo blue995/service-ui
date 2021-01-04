@@ -23,9 +23,9 @@ const Color = require('color');
 const getDefects = (fields) => fields.filter((item) => /defects/.test(item));
 
 const getExecutions = () => [
-  'statistics$executions$passed',
   'statistics$executions$failed',
   'statistics$executions$skipped',
+  'statistics$executions$passed',
 ];
 
 const getTotal = () => ['statistics$executions$total'];
@@ -157,10 +157,22 @@ const getChartOptions = (widget, options) => {
             ? formatMessage(messages[dataset.label])
             : dataset.label;
           const value = dataset.data[tooltipItem.index];
+          const isDefectType = /defects/.test(dataset.label);
           if (!value) {
             return '';
           }
-          const totalValue = totalDataset.data[tooltipItem.index];
+          let totalValue;
+
+          if (isDefectType) {
+            const defects = data.datasets.filter((item) => /defects/.test(item.label));
+
+            totalValue = defects.reduce(
+              (total, defect) => total + defect.data[tooltipItem.index],
+              0,
+            );
+          } else {
+            totalValue = totalDataset.data[tooltipItem.index];
+          }
           const percentageValue = -((-value / totalValue) * 100).toFixed(2);
           if (percentage) {
             return ` ${label}: ${percentageValue}%`;
