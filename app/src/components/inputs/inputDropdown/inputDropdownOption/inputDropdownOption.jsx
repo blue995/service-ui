@@ -13,9 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+import React from 'react';
 import { InputCheckbox } from 'components/inputs/inputCheckbox';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
+import { InputRadio } from 'components/inputs/inputRadio';
 import styles from './inputDropdownOption.scss';
 
 const cx = classNames.bind(styles);
@@ -24,31 +27,59 @@ export const DropdownOption = ({
   multiple,
   label,
   disabled,
+  hidden,
   selected,
   subOption,
   onChange,
   value,
+  independentSelection,
+  title,
 }) => {
   const onChangeHandler = () => {
     onChange && onChange(value);
+  };
+
+  const renderOptionComponent = () => {
+    let component;
+    if (multiple) {
+      component = (
+        <InputCheckbox value={selected} disabled={disabled} onChange={onChangeHandler}>
+          <span className={cx('option-label')}>{label}</span>
+        </InputCheckbox>
+      );
+    } else if (independentSelection) {
+      component = (
+        <InputRadio
+          name="dropdownOption"
+          disabled={disabled}
+          value={selected ? value : null}
+          ownValue={value}
+          onChange={onChangeHandler}
+        >
+          <span className={cx('option-label')}>{label}</span>
+        </InputRadio>
+      );
+    } else {
+      component = (
+        <div className={cx('single-option')} onClick={onChangeHandler}>
+          {label}
+        </div>
+      );
+    }
+
+    return component;
   };
   return (
     <div
       className={cx('dropdown-option', {
         selected: !multiple && selected,
         disabled,
+        hidden,
         'sub-option': subOption,
       })}
+      title={disabled && title}
     >
-      {multiple ? (
-        <InputCheckbox value={selected} disabled={disabled} onChange={onChangeHandler}>
-          <span className={cx('option-label')}>{label}</span>
-        </InputCheckbox>
-      ) : (
-        <div className={cx('single-option')} onClick={onChangeHandler}>
-          {label}
-        </div>
-      )}
+      {renderOptionComponent()}
     </div>
   );
 };
@@ -58,9 +89,12 @@ DropdownOption.propTypes = {
   multiple: PropTypes.bool,
   label: PropTypes.node,
   disabled: PropTypes.bool,
+  hidden: PropTypes.bool,
   subOption: PropTypes.bool,
   selected: PropTypes.bool,
+  independentSelection: PropTypes.bool,
   onChange: PropTypes.func,
+  title: PropTypes.string,
 };
 
 DropdownOption.defaultProps = {
@@ -68,7 +102,10 @@ DropdownOption.defaultProps = {
   multiple: false,
   label: '',
   disabled: false,
+  hidden: false,
   subOption: false,
   selected: false,
+  independentSelection: false,
   onChange: () => {},
+  title: '',
 };

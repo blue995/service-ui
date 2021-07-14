@@ -1,6 +1,7 @@
 package main
 
 import (
+	"compress/flate"
 	"log"
 	"net/http"
 	"os"
@@ -9,9 +10,9 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
-	"github.com/reportportal/commons-go/commons"
-	"github.com/reportportal/commons-go/conf"
-	"github.com/reportportal/commons-go/server"
+	"github.com/reportportal/commons-go/v5/commons"
+	"github.com/reportportal/commons-go/v5/conf"
+	"github.com/reportportal/commons-go/v5/server"
 	"github.com/unrolled/secure"
 )
 
@@ -45,7 +46,9 @@ func configureRouter(srv *server.RpServer, rpConf struct {
 }) {
 	srv.WithRouter(func(router *chi.Mux) {
 		// apply compression
-		router.Use(middleware.DefaultCompress)
+
+		compressor := middleware.NewCompressor(flate.DefaultCompression)
+		router.Use(compressor.Handler)
 		router.Use(middleware.Logger)
 		// content security policy
 		csp := map[string][]string{
@@ -65,9 +68,11 @@ func configureRouter(srv *server.RpServer, rpConf struct {
 			"worker-src":     {"'self'", "blob:"},
 			"font-src":       {"'self'", "data:", "fonts.googleapis.com", "fonts.gstatic.com", "*.rawgit.com"},
 			"style-src-elem": {"'self'", "data:", "'unsafe-inline'", "*.googleapis.com", "*.rawgit.com"},
+			"style-src":      {"'self'", "'unsafe-inline'", "https://tagmanager.google.com"},
 			"media-src":      {"'self'", "*.saucelabs.com", "blob:"},
-			"img-src":        {"*", "'self'", "data:", "blob:"},
+			"img-src":        {"*", "'self'", "'unsafe-inline'", "data:", "blob:", "http:", "https:", "www.google-analytics.com"},
 			"object-src":     {"'self'"},
+			"connect-src":    {"'self'", "https://www.google-analytics.com", "https://stats.g.doubleclick.net"},
 		}
 		// apply content security policies
 		var STSSeconds int64 = 315360000
@@ -102,6 +107,7 @@ func trimQuery(s string, sep string) string {
 	if -1 != sepIndex {
 		return s[:sepIndex]
 	}
+
 	return s
 }
 
@@ -110,6 +116,7 @@ func buildCSP(csp map[string][]string) string {
 	for k, v := range csp {
 		instr = append(instr, k+" "+strings.Join(v, " "))
 	}
+
 	return strings.Join(instr, "; ")
 }
 
@@ -124,8 +131,7 @@ func (hrw *redirectingRW) Header() http.Header {
 }
 
 func (hrw *redirectingRW) WriteHeader(status int) {
-	notFoundStatusCode := 404
-	if notFoundStatusCode == status {
+	if status == http.StatusNotFound {
 		hrw.ignore = true
 		http.Redirect(hrw.ResponseWriter, hrw.Request, "/ui/#notfound", http.StatusTemporaryRedirect)
 	} else {
@@ -137,5 +143,6 @@ func (hrw *redirectingRW) Write(p []byte) (int, error) {
 	if hrw.ignore {
 		return len(p), nil
 	}
+
 	return hrw.ResponseWriter.Write(p)
 }
