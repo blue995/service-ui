@@ -30,9 +30,21 @@ const getExecutions = () => [
 
 const getTotal = () => ['statistics$executions$total'];
 
-const convertIntoPercents = (datasets) => {
-  const totalDataset = Object.assign({}, datasets[0]);
+const getPercentageValue = (value, datasets, label, index) => {
+  const totalDataset = datasets[0];
+  const isDefectType = /defects/.test(label);
+  let totalValue = totalDataset && totalDataset.data[index];
 
+  if (isDefectType) {
+    const defects = datasets.filter((item) => /defects/.test(item.label));
+
+    totalValue = defects.reduce((total, defect) => total + defect.data[index], 0);
+  }
+
+  return -((-value / totalValue) * 100).toFixed(2);
+};
+
+const convertIntoPercents = (datasets) => {
   return datasets.map((dataset) =>
     Object.assign(
       {
@@ -40,8 +52,8 @@ const convertIntoPercents = (datasets) => {
       },
       dataset,
       {
-        data: dataset.data.map(
-          (value, index) => -((-value / totalDataset.data[index]) * 100).toFixed(2),
+        data: dataset.data.map((value, index) =>
+          getPercentageValue(value, datasets, dataset.label, index),
         ),
       },
     ),
@@ -152,28 +164,19 @@ const getChartOptions = (widget, options) => {
         },
         label(tooltipItem, data) {
           const dataset = data.datasets[tooltipItem.datasetIndex];
-          const totalDataset = data.datasets[0];
           const label = messages[dataset.label]
             ? formatMessage(messages[dataset.label])
             : dataset.label;
           const value = dataset.data[tooltipItem.index];
-          const isDefectType = /defects/.test(dataset.label);
           if (!value) {
             return '';
           }
-          let totalValue;
-
-          if (isDefectType) {
-            const defects = data.datasets.filter((item) => /defects/.test(item.label));
-
-            totalValue = defects.reduce(
-              (total, defect) => total + defect.data[tooltipItem.index],
-              0,
-            );
-          } else {
-            totalValue = totalDataset.data[tooltipItem.index];
-          }
-          const percentageValue = -((-value / totalValue) * 100).toFixed(2);
+          const percentageValue = getPercentageValue(
+            value,
+            data.datasets,
+            dataset.label,
+            tooltipItem.index,
+          );
           if (percentage) {
             return ` ${label}: ${percentageValue}%`;
           }
