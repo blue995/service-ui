@@ -36,7 +36,7 @@ const messages = defineMessages({
 export class TfsCredentials extends Component {
   static propTypes = {
     intl: PropTypes.object.isRequired,
-    darkView: PropTypes.bool,  
+    darkView: PropTypes.bool,
   };
 
   render() {
