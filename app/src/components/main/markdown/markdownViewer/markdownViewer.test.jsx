@@ -31,6 +31,7 @@ const orderedListMock = [
   '3. Numbered list item',
 ].join('\n');
 const linkMock = '[Report portal](http://reportportal.io/)';
+const unknownProtocolLinkMock = '[test](rpdroplocation://test)';
 const quoteMock = '> This is a quote.';
 const codeMock = '`var example = "hello!";`';
 
@@ -99,6 +100,15 @@ describe('MarkdownViewer', () => {
     expect(linkElement).toHaveLength(1);
     const linkNode = linkElement.getDOMNode();
     expect(linkNode).toHaveProperty('href', 'http://reportportal.io/');
+    expect(linkNode).toHaveProperty('target', '_blank');
+    expect(linkNode).toHaveProperty('rel', 'noreferrer noopener');
+  });
+  test('unknown protocol links are rendering correctly', () => {
+    const wrapper = mount(<MarkdownViewer value={unknownProtocolLinkMock} />);
+    const linkElement = wrapper.find('.markdown-viewer a');
+    expect(linkElement).toHaveLength(1);
+    const linkNode = linkElement.getDOMNode();
+    expect(linkNode).toHaveProperty('href', 'rpdroplocation://test');
     expect(linkNode).toHaveProperty('target', '_blank');
     expect(linkNode).toHaveProperty('rel', 'noreferrer noopener');
   });
