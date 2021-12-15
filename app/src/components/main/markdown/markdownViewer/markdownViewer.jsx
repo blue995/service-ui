@@ -35,7 +35,7 @@ export class MarkdownViewer extends Component {
   static defaultProps = {
     value: '',
     mode: MODE_DEFAULT,
-    onResize: () => { },
+    onResize: () => {},
   };
 
   constructor(props) {
@@ -77,9 +77,10 @@ export class MarkdownViewer extends Component {
     return (
       <div className={cx('viewer-wrapper')}>
         <div ref={this.container} className={cx('markdown-viewer', { [`mode-${mode}`]: mode })}>
-          {Parser(DOMPurify.sanitize(this.simpleMDE.markdown(value), {
-            ALLOWED_URI_REGEXP: new RegExp('^(https?|rpdroplocation)://.*'),
-          }),
+          {Parser(
+            DOMPurify.sanitize(this.simpleMDE.markdown(value), {
+              ALLOWED_URI_REGEXP: new RegExp('^(https?|rpdroplocation)://.*'),
+            }),
           )}
         </div>
       </div>
