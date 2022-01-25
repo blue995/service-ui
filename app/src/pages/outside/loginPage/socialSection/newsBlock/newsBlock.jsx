@@ -19,9 +19,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { ScrollWrapper } from 'components/main/scrollWrapper';
+import { referenceDictionary } from 'common/utils';
 import styles from './newsBlock.scss';
 import { PostBlock } from './postBlock';
-import { referenceDictionary } from 'common/utils';
 
 const cx = classNames.bind(styles);
 
@@ -68,7 +68,16 @@ export class NewsBlock extends Component {
               ))}
             </ScrollWrapper>
           </div>
-          <div className={cx('shs-links')}>SHS: <a href={referenceDictionary.shsTerms} target="_blank">Terms Of Use</a> | <a href={referenceDictionary.shsPrivacy} target="_blank">Privacy Notice</a></div>
+          <div className={cx('shs-links')}>
+            SHS: 
+            <a href={referenceDictionary.shsTerms} target="_blank">
+              Terms Of Use
+              </a>
+               | 
+              <a href={referenceDictionary.shsPrivacy} target="_blank">
+                Privacy Notice
+              </a>
+            </div>
         </div>
       </div>
     );
