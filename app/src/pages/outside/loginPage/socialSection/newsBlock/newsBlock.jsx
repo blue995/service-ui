@@ -77,7 +77,7 @@ export class NewsBlock extends Component {
             <a href={referenceDictionary.shsPrivacy} target="_blank">
               Privacy Notice
             </a>
-            </div>
+          </div>
         </div>
       </div>
     );
