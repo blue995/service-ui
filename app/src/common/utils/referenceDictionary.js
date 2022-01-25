@@ -25,4 +25,6 @@ export const referenceDictionary = {
   rpSlack: 'https://reportportal-slack-auto.herokuapp.com/',
   rpEmail: 'mailto:support@reportportal.io',
   rpEpam: 'https://www.epam.com/',
+  shsPrivacy: 'https://healthineers.sharepoint.com/SitePages/de/Siemens-Healthineers-Intranet-Data-Privacy-Notice.aspx',
+  shsTerms: 'https://healthineers.sharepoint.com/SitePages/Terms-of-Use.aspx'
 };
