@@ -69,14 +69,14 @@ export class NewsBlock extends Component {
             </ScrollWrapper>
           </div>
           <div className={cx('shs-links')}>
-            SHS: 
+            SHS:
             <a href={referenceDictionary.shsTerms} target="_blank">
               Terms Of Use
-              </a>
-               | 
-              <a href={referenceDictionary.shsPrivacy} target="_blank">
-                Privacy Notice
-              </a>
+            </a>
+               |
+            <a href={referenceDictionary.shsPrivacy} target="_blank">
+              Privacy Notice
+            </a>
             </div>
         </div>
       </div>

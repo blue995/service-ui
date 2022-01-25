@@ -79,8 +79,14 @@ export class Footer extends Component {
             <FormattedMessage id={'Footer.documentation'} defaultMessage={'Documentation'} />
           </a>
           SHS:
-          <a href={referenceDictionary.shsTerms} target="_blank"> Terms Of Use</a>
-          <a href={referenceDictionary.shsPrivacy} target="_blank"> Privacy Notice</a>
+          <a href={referenceDictionary.shsTerms} target="_blank"> 
+           
+          Terms Of Use
+          </a>
+          <a href={referenceDictionary.shsPrivacy} target="_blank">
+           
+          Privacy Notice
+          </a>
         </div>
         <div className={cx('text-wrapper')}>
           <div className={cx('footer-text')}>
