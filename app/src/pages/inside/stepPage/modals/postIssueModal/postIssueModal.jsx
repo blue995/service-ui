@@ -51,7 +51,6 @@ import Parser from 'html-react-parser';
 import { ItemsList } from '../makeDecisionModal/optionsSection/itemsList';
 import { JiraCredentials } from './jiraCredentials';
 import { RallyCredentials } from './rallyCredentials';
-import { TfsCredentials } from './tfsCredentials';
 import {
   INCLUDE_ATTACHMENTS_KEY,
   INCLUDE_LOGS_KEY,
@@ -72,7 +71,6 @@ const cx = classNames.bind(styles);
 const SYSTEM_CREDENTIALS_BLOCKS = {
   [JIRA]: JiraCredentials,
   [RALLY]: RallyCredentials,
-  [TFS]: TfsCredentials,
 };
 
 let validationConfig = null;
@@ -391,6 +389,7 @@ export class PostIssueModal extends Component {
             ],
           },
         }));
+        window.open(response.url, '_blank');
 
         return fetch(URLS.testItem(activeProject), {
           method: 'put',
@@ -426,6 +425,7 @@ export class PostIssueModal extends Component {
   };
 
   isJiraIntegration = (pluginName = this.state.pluginName) => pluginName === JIRA;
+  isTfsIntegration = (pluginName = this.state.pluginName) => pluginName === TFS;
 
   expandCredentials = () => {
     this.setState({
@@ -579,7 +579,7 @@ export class PostIssueModal extends Component {
                 <span>{formatMessage(messages.noDefaultPropertiesMessage)}</span>
               </div>
             )}
-            {!this.isBulkOperation && (
+            {!this.isBulkOperation && !this.isTfsIntegration && (
               <div className={cx('include-block-wrapper')}>
                 <h4 className={cx('form-block-header', 'dark-view')}>
                   <span className={cx('header-text', 'dark-view')}>
@@ -603,7 +603,7 @@ export class PostIssueModal extends Component {
               </div>
             )}
             {currentExtension && <currentExtension.component />}
-            {CredentialsComponent && (
+            {!this.isTfsIntegration && CredentialsComponent && (
               <div className={cx('credentials-block-wrapper', { expanded })}>
                 <h4 className={cx('form-block-header', 'dark-view')}>
                   <span onClick={this.expandCredentials} className={cx('header-text', 'dark-view')}>
