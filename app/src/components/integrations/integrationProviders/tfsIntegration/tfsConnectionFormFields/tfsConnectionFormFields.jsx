@@ -111,6 +111,19 @@ export class TfsConnectionFormFields extends Component {
             <Input mobileDisabled />
           </FieldErrorHint>
         </IntegrationFormField>
+        <IntegrationFormField
+          name="attachmentUrl"
+          label={formatMessage(messages.attachmentUrlLabel)}
+          required
+          disabled={disabled || editAuthMode}
+          lineAlign={lineAlign}
+          maxLength="55"
+          validate={commonValidators.btsUrl}
+        >
+          <FieldErrorHint>
+            <Input mobileDisabled />
+          </FieldErrorHint>
+        </IntegrationFormField>
         {/* [TB]: Not necessary for TFS (ATM) */}
         {/* <IntegrationFormField
           name="authType"

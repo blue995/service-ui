@@ -70,6 +70,10 @@ export class TfsSettings extends Component {
       value: this.props.data.integrationParameters.project,
       message: this.props.intl.formatMessage(messages.projectIdLabel),
     },
+    {
+      value: this.props.data.integrationParameters.attachmentUrl,
+      message: this.props.intl.formatMessage(messages.attachmentUrlLabel),
+    },
   ];
 
   getConfirmationFunc = (testConnection) => (data, metaData) => {

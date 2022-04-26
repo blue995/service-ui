@@ -21,6 +21,10 @@ export const messages = defineMessages({
     id: 'TfsConnectionFormFields.projectIdLabel',
     defaultMessage: 'Project ID in BTS',
   },
+  attachmentUrlLabel: {
+    id: 'TfsConnectionFormFields.attachmentUrlLabel',
+    defaultMessage: 'Attachment Service',
+  },
   accessKeyLabel: {
     id: 'TfsConnectionFormFields.accessKeyLabel',
     defaultMessage: 'AccessKey',
