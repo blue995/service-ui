@@ -44,39 +44,8 @@ export class Footer extends Component {
     return (
       <footer className={cx('footer')}>
         <div className={cx('footer-links')}>
-          <a
-            href={referenceDictionary.rpGitHub}
-            target="_blank"
-            onClick={() => tracking.trackEvent(FOOTER_EVENTS.FORK_US_CLICK)}
-          >
-            <FormattedMessage id={'Footer.git'} defaultMessage={'Fork us on GitHub'} />
-          </a>
-          <a
-            href={referenceDictionary.rpSlack}
-            target="_blank"
-            onClick={() => tracking.trackEvent(FOOTER_EVENTS.SLACK_LINK)}
-          >
-            <FormattedMessage id={'Footer.slack'} defaultMessage={'Chat with us on Slack'} />
-          </a>
-          <a
-            href={referenceDictionary.rpEmail}
-            onClick={() => tracking.trackEvent(FOOTER_EVENTS.CONTACT_US_LINK)}
-          >
-            <FormattedMessage id={'Footer.contact'} defaultMessage={'Contact us'} />
-          </a>
-          <a
-            href={referenceDictionary.rpEpam}
-            target="_blank"
-            onClick={() => tracking.trackEvent(FOOTER_EVENTS.EPAM_LINK)}
-          >
-            EPAM
-          </a>
-          <a
-            href={referenceDictionary.rpDoc}
-            target="_blank"
-            onClick={() => tracking.trackEvent(FOOTER_EVENTS.DOCUMENTATION_LINK)}
-          >
-            <FormattedMessage id={'Footer.documentation'} defaultMessage={'Documentation'} />
+          <a href={referenceDictionary.teamsChannel} target="_blank">
+            Get Help
           </a>
           SHS:&nbsp;
           <a href={referenceDictionary.shsTerms} target="_blank">
