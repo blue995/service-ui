@@ -43,7 +43,7 @@ jobs:
           node-version: '10.13.0'
 
       - name: Setup Go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v3
         with:
           go-version: '^1.14.1'
 
@@ -58,10 +58,9 @@ jobs:
           npm --prefix ${{ env.UI_BUILD_REACT }} run build
 
       - name: Go Linter
-        uses: golangci/golangci-lint-action@v2
+        uses: golangci/golangci-lint-action@v3
         with:
-          version: v1.36.0
-          skip-go-installation: true
+          version: latest
           args: '--deadline 10m'
 
       - name: Go Tests
