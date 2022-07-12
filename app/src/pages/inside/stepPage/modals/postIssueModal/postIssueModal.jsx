@@ -535,6 +535,7 @@ export class PostIssueModal extends Component {
                   </FieldProvider>
                 ))}
               </div>
+            </div>
             )}
             {!this.isBulkOperation && !this.isTfsIntegration && (
               <div className={cx('include-block-wrapper')}>
@@ -575,7 +576,6 @@ export class PostIssueModal extends Component {
               </div>
             )}
           </form>
-        )}
       </DarkModalLayout>
     );
   }
