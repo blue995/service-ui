@@ -50,31 +50,37 @@ export const DefectTypeSelector = ({ selectDefectType, selectedItem, isNarrowVie
       )}
       <div>
         Product Bug:
-        <br/>
+        <br />
         - Issue in the product code
-        <br/>
+        <br />
         - Startup issues can be a product bug as well!
- <br/>
-<br/>
-Automation Bug:
-<br/>
-- Issue in test itself or test.sdk
-- Test failing because of a specific model type
-<br/>
-<br/>
-Subsequent Fault:<br/>
-- Test fails, because of an earlier failing test. (Patient was closed, …)<br/>
-<br/>
-System Issue:
-<br/>
-- Test agent / network issue<br/>
-<br/>
-No Defect / Ignored:<br/>
-- Should not be used. Could affect next analysis negatively.<br/>
-<br/>
-To investigate:<br/>
--Issue still needs to be investigated
-</div>
+        <br />
+        <br />
+        Automation Bug:
+        <br />
+        - Issue in test itself or test.sdk
+        - Test failing because of a specific model type
+        <br />
+        <br />
+        Subsequent Fault:
+        <br />
+        - Test fails, because of an earlier failing test. (Patient was closed, …)
+        <br />
+        <br />
+        System Issue:
+        <br />
+        - Test agent / network issue
+        <br />
+        <br />
+        No Defect / Ignored:
+        <br />
+        - Should not be used. Could affect next analysis negatively.
+        <br />
+        <br />
+        To investigate:
+        <br />
+        -Issue still needs to be investigated
+      </div>
     </>
   );
 };
