@@ -29,4 +29,5 @@ export const referenceDictionary = {
     'https://healthineers.sharepoint.com/SitePages/de/Siemens-Healthineers-Intranet-Data-Privacy-Notice.aspx',
   shsTerms: 'https://healthineers.sharepoint.com/SitePages/Terms-of-Use.aspx',
   teamsChannel: 'https://teams.microsoft.com/l/channel/19%3a2789eac5158f4d1fa1aa368aa052e7a6%40thread.skype/Report%2520Portal?groupId=a699fc64-dbfc-4d46-8db6-8fa458fb941a&tenantId=5dbf1add-202a-4b8d-815b-bf0fb024e033',
+  
 };

@@ -33,10 +33,7 @@ export const DefectTypeSelector = ({ selectDefectType, selectedItem, isNarrowVie
       {Object.keys(defectTypes).length > 0 && (
         <div className={cx('defect-options')}>
           {DEFECT_TYPES_SEQUENCE.map((option) => (
-            <div
-              key={option}
-              className={cx('select-option-group', { 'narrow-view': isNarrowView })}
-            >
+            <div key={option} className={cx('select-option-group')}>
               {defectTypes[option].map((defectType) => (
                 <div key={defectType.locator} className={cx('select-option')}>
                   <DefectTypeSelectorItem
@@ -51,18 +48,25 @@ export const DefectTypeSelector = ({ selectDefectType, selectedItem, isNarrowVie
           ))}
         </div>
       )}
-      <div>Product Bug:<br/>
- - Issue in the product code<br/>
- - Startup issues can be a product bug as well!<br/>
+      <div>
+        Product Bug:
+        <br/>
+        - Issue in the product code
+        <br/>
+        - Startup issues can be a product bug as well!
+ <br/>
 <br/>
-Automation Bug:<br/>
+Automation Bug:
+<br/>
 - Issue in test itself or test.sdk
-- Test failing because of a specific model type<br/>
+- Test failing because of a specific model type
+<br/>
 <br/>
 Subsequent Fault:<br/>
 - Test fails, because of an earlier failing test. (Patient was closed, …)<br/>
 <br/>
-System Issue:<br/>
+System Issue:
+<br/>
 - Test agent / network issue<br/>
 <br/>
 No Defect / Ignored:<br/>

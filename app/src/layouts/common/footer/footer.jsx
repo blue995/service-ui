@@ -20,9 +20,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import { FormattedMessage } from 'react-intl';
-import { FOOTER_EVENTS } from 'components/main/analytics/events';
 import { uiBuildVersionSelector } from 'controllers/appInfo';
 import { referenceDictionary } from 'common/utils/referenceDictionary';
+
 import styles from './footer.scss';
 
 const cx = classNames.bind(styles);
@@ -40,7 +40,7 @@ export class Footer extends Component {
     }).isRequired,
   };
   render() {
-    const { buildVersion, tracking } = this.props;
+    const { buildVersion } = this.props;
     return (
       <footer className={cx('footer')}>
         <div className={cx('footer-links')}>
