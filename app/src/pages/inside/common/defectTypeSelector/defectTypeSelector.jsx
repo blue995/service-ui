@@ -59,6 +59,7 @@ export const DefectTypeSelector = ({ selectDefectType, selectedItem, isNarrowVie
         Automation Bug:
         <br />
         - Issue in test itself or test.sdk
+        <br />
         - Test failing because of a specific model type
         <br />
         <br />
