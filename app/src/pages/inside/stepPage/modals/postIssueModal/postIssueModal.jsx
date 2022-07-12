@@ -538,28 +538,28 @@ export class PostIssueModal extends Component {
             </div>
           )}
           {!this.isBulkOperation && !this.isTfsIntegration && (
-             <div className={cx('include-block-wrapper')}>
-               <h4 className={cx('form-block-header', 'dark-view')}>
-                 <span className={cx('header-text', 'dark-view')}>
-                   {formatMessage(messages.includeDataHeader)}
-                 </span>
-               </h4>
-               <div className={cx('include-data-block')}>
-                 {this.dataFieldsConfig.map((item) => (
-                   <FieldProvider
-                     key={item.name}
-                     name={item.name}
-                     format={Boolean}
-                     onChange={(e) => this.trackFieldClick(e, item.eventFn)}
-                   >
-                     <InputCheckbox>
-                       <span className={cx('switch-field-label', 'dark-view')}>{item.title}</span>
-                     </InputCheckbox>
-                   </FieldProvider>
-                 ))}
-               </div>
-             </div>
-           )}
+            <div className={cx('include-block-wrapper')}>
+              <h4 className={cx('form-block-header', 'dark-view')}>
+                <span className={cx('header-text', 'dark-view')}>
+                  {formatMessage(messages.includeDataHeader)}
+                </span>
+              </h4>
+              <div className={cx('include-data-block')}>
+                {this.dataFieldsConfig.map((item) => (
+                  <FieldProvider
+                    key={item.name}
+                    name={item.name}
+                    format={Boolean}
+                    onChange={(e) => this.trackFieldClick(e, item.eventFn)}
+                  >
+                    <InputCheckbox>
+                      <span className={cx('switch-field-label', 'dark-view')}>{item.title}</span>
+                    </InputCheckbox>
+                  </FieldProvider>
+                ))}
+              </div>
+            </div>
+          )}
           {currentExtension && <currentExtension.component />}
           {!this.isTfsIntegration && CredentialsComponent && (
             <div className={cx('credentials-block-wrapper', { expanded })}>
@@ -575,7 +575,7 @@ export class PostIssueModal extends Component {
               </div>
             </div>
           )}
-          </form>
+        </form>
       </DarkModalLayout>
     );
   }
