@@ -53,7 +53,7 @@ export class TfsCredentials extends Component {
           // required
           type="text"
         >
-          <FieldErrorHint>
+          <FieldErrorHint darkView={darkView}>
             <InputTextArea className={darkView && 'dark-view'} />
           </FieldErrorHint>
         </FormField>
