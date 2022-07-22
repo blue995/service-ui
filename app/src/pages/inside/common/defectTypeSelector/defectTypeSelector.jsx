@@ -48,7 +48,8 @@ export const DefectTypeSelector = ({ selectDefectType, selectedItem, isNarrowVie
           ))}
         </div>
       )}
-      <div>
+      <div className={cx('hint-text')}>
+        <br />
         Product Bug:
         <br />
         - Issue in the product code
