@@ -70,11 +70,17 @@ export class Sidebar extends Component {
             updateStorageItem(APPLICATION_SETTINGS, { shouldRequestOnboarding: false });
           }
         })
-        .catch(({ message }) => {
-          this.props.showNotification({
+        .catch(({ message, status }) => {
+          if(status == 404) {
+            //do nothing
+          }
+          else {
+            this.props.showNotification({
             type: NOTIFICATION_TYPES.ERROR,
             message,
           });
+          }
+          
         });
     }
   }
