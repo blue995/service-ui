@@ -71,16 +71,14 @@ export class Sidebar extends Component {
           }
         })
         .catch(({ message, status }) => {
-          if(status == 404) {
-            //do nothing
-          }
-          else {
+          if (status === 404) {
+            // do nothing
+          } else {
             this.props.showNotification({
-            type: NOTIFICATION_TYPES.ERROR,
-            message,
-          });
+              type: NOTIFICATION_TYPES.ERROR,
+              message,
+            });
           }
-          
         });
     }
   }
