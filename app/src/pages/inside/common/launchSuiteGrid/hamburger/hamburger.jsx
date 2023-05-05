@@ -337,6 +337,7 @@ export class Hamburger extends Component {
             {launch.mode === 'DEFAULT' && (
               <HamburgerMenuItem
                 text={intl.formatMessage(messages.analysis)}
+                disabled={true}
                 onClick={() => {
                   tracking.trackEvent(LAUNCHES_PAGE_EVENTS.CLICK_ANALYSIS_LAUNCH_MENU);
                   customProps.onAnalysis(launch);
