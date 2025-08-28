@@ -31,3 +31,24 @@ export const referenceDictionary = {
   teamsChannel:
     'https://teams.microsoft.com/l/channel/19%3a2789eac5158f4d1fa1aa368aa052e7a6%40thread.skype/Report%2520Portal?groupId=a699fc64-dbfc-4d46-8db6-8fa458fb941a&tenantId=5dbf1add-202a-4b8d-815b-bf0fb024e033',
 };
+
+export const docsReferences = {
+  indexSettingsDocs:
+    'https://reportportal.io/docs/analysis/AutoAnalysisOfLaunches/#removegenerate-index',
+  autoAnalysisDocs: 'https://reportportal.io/docs/analysis/AutoAnalysisOfLaunches',
+  baseAutoAnalysisDocs:
+    'https://reportportal.io/docs/analysis/AutoAnalysisOfLaunches/#base-for-analysis',
+  similarItemsDocs: 'https://reportportal.io/docs/analysis/SearchForTheSimilarToInvestigateItems',
+  uniqueErrorsDocs: 'https://reportportal.io/docs/analysis/UniqueErrorAnalysis',
+  patternAnalysisDocs: 'https://reportportal.io/docs/analysis/PatternAnalysis',
+  emptyStatePatternAnalysisDocs: 'https://reportportal.io/docs/analysis/PatternAnalysis',
+  notificationsDocs:
+    'https://reportportal.io/docs/reportportal-configuration/ProjectConfiguration#e-mail-notifications',
+  emptyStateNotificationsDocs:
+    'https://reportportal.io/docs/reportportal-configuration/ProjectConfiguration#e-mail-notifications',
+  emptyStateIntegrationsDocs:
+    'https://reportportal.io/docs/reportportal-configuration/IntegrationViaPlugin',
+  authorizationWithUsersApiKeyForAgents:
+    'https://reportportal.io/docs/reportportal-configuration/HowToGetAnAccessTokenInReportPortal/#2-authorization-with-users-api-key-for-agents',
+  workWithReports: 'https://reportportal.io/docs/work-with-reports/InvestigationOfFailure',
+};

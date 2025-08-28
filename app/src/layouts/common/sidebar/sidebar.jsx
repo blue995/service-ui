@@ -96,9 +96,7 @@ export class Sidebar extends Component {
               className={cx('sidebar-btn')}
               onClick={item.onClick}
             >
-              {item.component ? (
-                <item.component />
-              ) : (
+              {item.component || (
                 <SidebarButton link={item.link} icon={item.icon}>
                   {item.message}
                 </SidebarButton>
