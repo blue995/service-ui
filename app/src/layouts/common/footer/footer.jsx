@@ -20,7 +20,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import { FormattedMessage } from 'react-intl';
-import { uiBuildVersionSelector } from 'controllers/appInfo';
 import { FOOTER_EVENTS } from 'components/main/analytics/events';
 import { referenceDictionary } from 'common/utils/referenceDictionary';
 import { serverFooterLinksSelector, uiBuildVersionSelector } from 'controllers/appInfo';
