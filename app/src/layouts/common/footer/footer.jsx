@@ -14,13 +14,11 @@
  * limitations under the License.
  */
 
-import React, { Component } from 'react';
-import track from 'react-tracking';
-import { connect } from 'react-redux';
+import React, { useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import { FormattedMessage } from 'react-intl';
-import { FOOTER_EVENTS } from 'components/main/analytics/events';
 import { referenceDictionary } from 'common/utils/referenceDictionary';
 import { serverFooterLinksSelector, uiBuildVersionSelector } from 'controllers/appInfo';
 import { useTracking } from 'react-tracking';
