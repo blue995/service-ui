@@ -23,7 +23,7 @@ import classNames from 'classnames/bind';
 import { injectIntl, defineMessages } from 'react-intl';
 import { fetch, updateSessionItem } from 'common/utils';
 import { URLS } from 'common/urls';
-import { JIRA, RALLY, TFS } from 'common/constants/pluginNames';
+import { JIRA, TFS } from 'common/constants/pluginNames';
 import { COMMON_LOCALE_KEYS } from 'common/constants/localization';
 import { activeProjectSelector, userIdSelector } from 'controllers/user';
 import {
@@ -38,12 +38,10 @@ import { DynamicFieldsSection } from 'components/fields/dynamicFieldsSection';
 import {
   normalizeFieldsWithOptions,
   mapFieldsToValues,
-  removeNoneValues,
-  isJiraCloudAssigneeField,
 } from 'components/fields/dynamicFieldsSection/utils';
 import { projectInfoSelector } from 'controllers/project';
 import { FieldProvider } from 'components/fields/fieldProvider';
-import { Checkbox } from '@reportportal/ui-kit';
+import { InputCheckbox } from 'components/inputs/inputCheckbox';
 import { ISSUE_TYPE_FIELD_KEY } from 'components/integrations/elements/bts/constants';
 import { BtsIntegrationSelector } from 'pages/inside/common/btsIntegrationSelector';
 import { DarkModalLayout, ModalFooter } from 'components/main/modal/darkModalLayout';
@@ -52,11 +50,6 @@ import { hideModalAction } from 'controllers/modal';
 import ErrorInlineIcon from 'common/img/error-inline.svg';
 import Parser from 'html-react-parser';
 import { COMMAND_POST_ISSUE } from 'controllers/plugins/uiExtensions/constants';
-import {
-  AUTOCOMPLETE_TYPE,
-  MULTIPLE_AUTOCOMPLETE_TYPE,
-  CREATABLE_MULTIPLE_AUTOCOMPLETE_TYPE,
-} from 'components/fields/dynamicFieldsSection/constants';
 import {
   INCLUDE_ATTACHMENTS_KEY,
   INCLUDE_LOGS_KEY,
@@ -108,7 +101,7 @@ const messages = defineMessages({
   },
   postIssueSuccess: {
     id: 'PostIssueModal.postIssueSuccess',
-    defaultMessage: 'Ticket has been created successfully',
+    defaultMessage: 'Ticket has been created.',
   },
   postIssueForTheTest: {
     id: 'PostIssueModal.postIssueForTheTest',
@@ -155,6 +148,7 @@ export class PostIssueModal extends Component {
     showNotification: PropTypes.func.isRequired,
     initialize: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
+    change: PropTypes.func.isRequired,
     getBtsIntegrationBackLink: PropTypes.func.isRequired,
     dirty: PropTypes.bool.isRequired,
     postIssueExtensions: PropTypes.array,
@@ -162,7 +156,7 @@ export class PostIssueModal extends Component {
       items: PropTypes.array,
       fetchFunc: PropTypes.func,
       eventsInfo: PropTypes.object,
-    }),
+    }).isRequired,
     tracking: PropTypes.shape({
       trackEvent: PropTypes.func,
       getTrackingData: PropTypes.func,
@@ -261,7 +255,7 @@ export class PostIssueModal extends Component {
     },
   ];
 
-  initIntegrationFields = (defectFormFields = [], pluginName = '') => {
+  initIntegrationFields = (defectFormFields = [], pluginName) => {
     const defaultOptionValueKey = getDefaultOptionValueKey(pluginName);
     const fields = normalizeFieldsWithOptions(defectFormFields, defaultOptionValueKey).map((item) =>
       item.fieldType === ISSUE_TYPE_FIELD_KEY ? { ...item, disabled: true } : item,
@@ -276,38 +270,20 @@ export class PostIssueModal extends Component {
   };
 
   prepareDataToSend = (formData) => {
-    const refinedData = removeNoneValues(formData);
     const {
       getBtsIntegrationBackLink,
       data: { items },
     } = this.props;
-    const pluginName = this.state.pluginName;
-    const fields = this.state.fields.map((field) => {
-      const isAutocomplete =
-        field.fieldType === AUTOCOMPLETE_TYPE ||
-        field.fieldType === MULTIPLE_AUTOCOMPLETE_TYPE ||
-        field.fieldType === CREATABLE_MULTIPLE_AUTOCOMPLETE_TYPE;
-      const formFieldData = refinedData[field.id];
-      let preparedFormFieldData = formFieldData;
-      if (!Array.isArray(formFieldData)) {
-        preparedFormFieldData = formFieldData ? [formFieldData] : [];
-      }
-      return {
-        ...field,
-        [isAutocomplete ? 'namedValue' : 'value']: preparedFormFieldData,
-        ...(isJiraCloudAssigneeField(pluginName, field) && {
-          value: preparedFormFieldData.map((item) => item.id),
-        }),
-      };
-    });
+
+    const fields = this.state.fields.map((field) => ({ ...field, value: formData[field.id] }));
     const backLinks = items.reduce(
       (acc, item) => ({ ...acc, [item.id]: getBtsIntegrationBackLink(item) }),
       {},
     );
     const data = {
-      [INCLUDE_COMMENTS_KEY]: refinedData[INCLUDE_COMMENTS_KEY],
-      [INCLUDE_ATTACHMENTS_KEY]: refinedData[INCLUDE_ATTACHMENTS_KEY],
-      [INCLUDE_LOGS_KEY]: refinedData[INCLUDE_LOGS_KEY],
+      [INCLUDE_COMMENTS_KEY]: formData[INCLUDE_COMMENTS_KEY],
+      [INCLUDE_ATTACHMENTS_KEY]: formData[INCLUDE_ATTACHMENTS_KEY],
+      [INCLUDE_LOGS_KEY]: formData[INCLUDE_LOGS_KEY],
       logQuantity: LOG_QUANTITY,
       item: items[0].id,
       fields,
@@ -330,13 +306,12 @@ export class PostIssueModal extends Component {
     const { pluginName, integrationId } = this.state;
     const {
       integrationParameters: { project: btsProject, url: btsUrl },
-      integrationType: {
-        details: { allowedCommands },
-      },
+      integrationType: { details },
     } = namedBtsIntegrations[pluginName].find((item) => item.id === integrationId);
-    const isCommandAvailable = allowedCommands
-      ? allowedCommands.indexOf(COMMAND_POST_ISSUE) !== -1
-      : false;
+    const isCommandAvailable =
+      details &&
+      details.allowedCommands &&
+      details.allowedCommands.indexOf(COMMAND_POST_ISSUE) !== -1;
     const requestParams = { data, method: 'POST' };
     let url = URLS.btsIntegrationPostTicket(activeProject, integrationId);
 
@@ -392,10 +367,10 @@ export class PostIssueModal extends Component {
           type: NOTIFICATION_TYPES.SUCCESS,
         });
       })
-      .catch((err) => {
+      .catch(() => {
         this.props.hideScreenLockAction();
         this.props.showNotification({
-          message: `${formatMessage(messages.postIssueFailed)}. ${err.message}`,
+          message: formatMessage(messages.postIssueFailed),
           type: NOTIFICATION_TYPES.ERROR,
         });
       });
@@ -448,15 +423,9 @@ export class PostIssueModal extends Component {
       namedBtsIntegrations,
       intl: { formatMessage },
       data: { items },
-      projectInfo,
     } = this.props;
     const { pluginName, integrationId, fields } = this.state;
     const currentExtension = this.getCurrentExtension();
-    const integrationInfo = {
-      integrationId,
-      projectName: projectInfo.projectName,
-      pluginName,
-    };
 
     return (
       <DarkModalLayout
@@ -474,13 +443,14 @@ export class PostIssueModal extends Component {
           />
         }
       >
-        <form className={cx('post-issue-form')}>
+        <form className={cx('post-issue-form', 'dark-view')}>
           <BtsIntegrationSelector
             namedBtsIntegrations={namedBtsIntegrations}
             pluginName={pluginName}
             integrationId={integrationId}
             onChangeIntegration={this.onChangeIntegration}
             onChangePluginName={this.onChangePlugin}
+            darkView
           />
           {fields.length ? (
             <DynamicFieldsSection
@@ -488,7 +458,6 @@ export class PostIssueModal extends Component {
               fields={fields}
               defaultOptionValueKey={getDefaultOptionValueKey(pluginName)}
               darkView
-              integrationInfo={integrationInfo}
             />
           ) : (
             <div className={cx('no-default-properties-message')}>
@@ -503,7 +472,7 @@ export class PostIssueModal extends Component {
                   {formatMessage(messages.includeDataHeader)}
                 </span>
               </h4>
-              <div className={cx('include-data-fields')}>
+              <div className={cx('include-data-block')}>
                 {this.dataFieldsConfig.map((item) => (
                   <FieldProvider
                     key={item.name}
@@ -520,20 +489,6 @@ export class PostIssueModal extends Component {
             </div>
           )}
           {currentExtension && <currentExtension.component />}
-          {!this.isTfsIntegration && CredentialsComponent && (
-            <div className={cx('credentials-block-wrapper', { expanded })}>
-              <h4 className={cx('form-block-header', 'dark-view')}>
-                <span onClick={this.expandCredentials} className={cx('header-text', 'dark-view')}>
-                  {formatMessage(messages.credentialsHeader, {
-                    system: pluginName,
-                  })}
-                </span>
-              </h4>
-              <div className={cx('credentials-block', { expand: wasExpanded })}>
-                <CredentialsComponent darkView />
-              </div>
-            </div>
-          )}
         </form>
       </DarkModalLayout>
     );
