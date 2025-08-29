@@ -78,7 +78,7 @@ export const AttributeEditor = ({
   useEffect(() => {
     const { key, value } = attribute;
     setState({ key, value, errors: getValidationErrors(key, value), isKeyEdited: false });
-  }, [attribute]);
+  }, [attribute, getValidationErrors]);
 
   const byKeyComparator = (attr, item, key, value) => attr.key === item && attr.value === value;
 

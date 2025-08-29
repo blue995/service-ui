@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import React, { useEffect } from 'react';
+import React, { useEffect, closeHandler } from 'react';
 import { Button } from '@reportportal/ui-kit';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
@@ -68,7 +68,7 @@ export const TwoStepsFooter = ({
 
   useEffect(() => {
     closeModal && closeHandler();
-  }, [closeModal]);
+  }, [closeModal, closeHandler]);
 
   useEffect(() => {
     !closeModal && forceConfirm && handleSubmit();

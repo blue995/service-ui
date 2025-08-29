@@ -43,7 +43,7 @@ export const EditableAttributeList = ({
     if (defaultOpen && !attributes.length) {
       handleAddNew();
     }
-  }, [disabled, attributes]);
+  }, [disabled, attributes, handleAddNew, defaultOpen]);
 
   const handleChange = (attr) => {
     onChange(attr);

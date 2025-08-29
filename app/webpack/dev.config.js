@@ -20,7 +20,7 @@ const CircularDependencyPlugin = require('circular-dependency-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 dotenv.config();
-
+// eslint-disable-next-line no-console
 module.exports = () => {
   if (!process.env.PROXY_PATH) {
     console.log('========== Specify the PROXY_PATH variable in the .env file =========');
